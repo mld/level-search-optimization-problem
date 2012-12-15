@@ -26,6 +26,7 @@ This basecode got some dependencies to handle easy text parsing.
 
 Build
 ----------------------------------------
+	$ cd src/
 	$ make
 
 
