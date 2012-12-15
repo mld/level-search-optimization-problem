@@ -11,7 +11,7 @@ This basecode got some dependencies to handle easy text parsing.
 ### Boost::regex
 1. Fetch a copy of the latest boost version: http://www.boost.org/  
 2. Untar the archive  
-        $ tar -xzvf boost_1_52_0.tar.gz   
+        <$ tar -xzvf boost_1_52_0.tar.gz>   
 3. Building boost::regex:  
         $ cd boost_1_52_0/libs/regex/build/  
         $ make -f gcc.mak  
