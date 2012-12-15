@@ -26,4 +26,9 @@ This basecode got some dependencies to handle easy text parsing.
 
 Build
 ----------------------------------------
-	make
+	$ make
+
+
+Usage
+----------------------------------------
+	$ ./lsop 10 10 10 40 ./sort-bot
