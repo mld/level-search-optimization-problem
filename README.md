@@ -20,8 +20,8 @@ $ make -f gcc.mak
 
 4. Edit the projects Makefile to link the boost directory aswell as the newly built lib
 
-INC = -I../boost_1_52_0/
-LIBS = -lpthread ../boost_1_52_0/libs/regex/build/gcc/libboost_regex-gcc-1_52.a
+  INC = -I../boost_1_52_0/
+  LIBS = -lpthread ../boost_1_52_0/libs/regex/build/gcc/libboost_regex-gcc-1_52.a
 
 Build
 ----------------------------------------
