@@ -8,7 +8,7 @@
 #include <string>
 
  
-int AtoI (char *input) {
+int AtoI (std::string input) {
 	int iout;
 	std::stringstream ss(input);
 	ss >> iout;
@@ -26,7 +26,7 @@ int main (int argc, char** argv) {
 	std::string line;
 
 	/** Read arguments */
-	if (argc != 6) {
+	if(argc != 6) {
 		std::cout << "usage: " << argv[0] << " <board x> <board y> <board z> <turn limit> <bot>" << std::endl;
 		return 1;
 	} else {
@@ -48,15 +48,31 @@ int main (int argc, char** argv) {
 		std::getline(std::cin, line);
 
 		/** Parse input */
-		boost::regex e("(add) (\\d+) (\\d+)");
 		boost::smatch m;
-		if(boost::regex_match(line, m, e)) {
-			std::cout << "Matches: " << m[1] << ":" << m[2] << "," << m[3] << std::endl;
+		if(boost::regex_match(line, m, boost::regex("(add|sub|get) (\\d+) (\\d+)"))) {
+			if(m[1] == "add")
+				board.add(AtoI(m[2]), AtoI(m[3]));
+			else if(m[1] == "sub")
+				board.sub(AtoI(m[2]), AtoI(m[3]));
+			else if(m[1] == "get")
+				std::cout << board.get(AtoI(m[2]), AtoI(m[3])) << std::endl;
 		} else {
-			std::cout << "syntax error: \"" << line << "\"" << std::endl;
+			std::cout << "unknown command: \"" << line << "\"" << std::endl;
 		}
 
+		/** Increment turn */
+		turn++;
 	}
+
+	/** Print board and statistics */
+	for(unsigned int y = 0; y < board.sizeY(); y++) {
+		for(unsigned int x = 0; x < board.sizeX(); x++) {
+			std::cout << board.get(x, y) << "\t";
+		}
+		std::cout << std::endl;
+	}
+
+
 
 	/** Stop botcontroler */
 	//bc->stop();
