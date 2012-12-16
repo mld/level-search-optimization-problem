@@ -26,13 +26,33 @@ unsigned int Board::sizeZ() {
 }
 
 void Board::update(unsigned int x, unsigned int y) {
+	unsigned int z = b[y][x];
 	/** Uppdate board acordingly to game rules */
+	if(z != 0) {
+		if(z == b[(y+1)%yMax][x]
+			|| z == b[((y+yMax)-1)%yMax][x] ) {
+
+			/** Zero col */
+			for(unsigned int i = 0; i < yMax; i++)
+				if(z == b[i][x])
+					b[i][x] = 0;
+		}
+		if( z == (b[y][(x+1)%xMax])
+			|| z == (b[y][((x+xMax)-1)%xMax]) ) {
+
+			/** Zero row */
+			for(unsigned int i = 0; i < xMax; i++)
+				if(z == b[y][i])
+					b[y][i] = 0;
+		}
+		
+	}
 };
 
 int Board::add(unsigned int x, unsigned int y) {
-	if(y < b.size()
-		&& x < b[y].size()
-		&& (b[y][x] + 1) != zMax) {
+	if(y < yMax 
+		&& x < xMax
+		&& b[y][x] != zMax-1) {
 
 		b[y][x]++;
 		update(x, y);
@@ -42,11 +62,11 @@ int Board::add(unsigned int x, unsigned int y) {
 };
 
 int Board::sub(unsigned int x, unsigned int y) {
-	if(y < b.size()
-		&& x < b[y].size()
-		&& (b[y][x] + 1) != zMax) {
+	if(y < yMax
+		&& x < xMax
+		&& b[y][x] != 0) {
 
-		b[y][x]++;
+		b[y][x]--;
 		update(x, y);
 		return 1;
 	}
